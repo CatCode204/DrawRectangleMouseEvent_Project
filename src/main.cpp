@@ -16,14 +16,20 @@ float orthorTop = 5;
 int currentWidth = 600;
 int currentHeight = 600;
 
+float currentRed = 0;
+float currentBlue = 0;
+float currentGreen = 0;
+
 /*Hàm vẽ hình vuông*/
 void DrawSquare(float x,float y,float size = 1) {
+    glColor3ub(rand() % 256,rand() % 256,rand() % 256);
     glBegin(GL_POLYGON);
         glVertex2f(x - size / 2, y - size / 2);
         glVertex2f(x + size / 2, y - size / 2);
         glVertex2f(x + size / 2, y + size / 2);
         glVertex2f(x - size / 2, y + size / 2);
     glEnd();
+    glColor3f(currentRed,currentGreen,currentBlue);
 }
 
 void myReshape(int w,int h) {
@@ -54,7 +60,7 @@ Point2D ScreenPositionToOrthor(int x,int y) {
 void myMouseEvent(int button,int state,int x,int y) {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         Point2D pos = ScreenPositionToOrthor(x,y);
-        DrawSquare(pos.x,pos.y,1);
+        DrawSquare(pos.x,pos.y,rand() % 3 + 1);
     }
     glutPostRedisplay();
 }
@@ -77,7 +83,7 @@ int main(int argc,char* argv[]) {
     glFlush();
     glutReshapeFunc(myReshape);
     glutMouseFunc(myMouseEvent);
-    glColor3f(0,0,0);
+    glColor3f(currentRed,currentBlue,currentGreen);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(orthorLeft,orthorRight,orthorBot,orthorTop);
