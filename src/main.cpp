@@ -70,7 +70,6 @@ void myDisplay() {
 }
 
 int main(int argc,char* argv[]) {
-    cout << "LOCAL" << endl;
     glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowPosition(0,0);
